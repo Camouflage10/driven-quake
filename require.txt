@@ -1,0 +1,9 @@
+pandas
+matplotlib
+numpy
+sklearn
+tensorflow
+keras
+seaborn
+ipynb-py-convert
+ruamel.yaml
