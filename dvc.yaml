@@ -1,16 +1,18 @@
 stages:
   setup:
-    cmd:  ipynb-py-convert disease_model.ipynb disease_model.py
+    cmd:  ipynb-py-convert git_quake.ipynb git_quake.py
     deps:
-    - disease_model.ipynb
+    - git_quake.ipynb
     outs:
-    - disease_model.py  
+    - git_quake.py  
   train:
-    cmd: python disease_model.py
+    cmd: python git_quake.py
     deps:
-    - disease_model.py
+    - git_quake.py
     outs:
-    - stats.png
-    metrics:
-    - metrics.json:
-        cache: false
+    - estimators.png
+    - learning_rate.png
+    - reg_alpha.png
+    - max_depth.png
+    - reg_lambda.png
+    - submission.csv
