@@ -6,4 +6,3 @@ scikit-learn
 seaborn
 ipynb-py-convert
 ruamel.yaml
-json
