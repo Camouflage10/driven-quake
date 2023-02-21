@@ -1,9 +1,6 @@
 name: compare-and-update-metrics
 on:
   push:
-    branches:
-      - '*'
-      - '!main'
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -14,20 +11,20 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            git config --global --add safe.directory /__w/disease-spread-model/disease-spread-model
+            git config --global --add safe.directory /__w/driven-quake/driven-quake
             python -m pip install -r require.txt
             dvc repro
             git fetch --prune
             
-            dvc metrics diff --show-md main > report.md
             
             echo "## confusion matrix" >> report.md
-            cml publish cm.png --md >> report.md
+            cml publish score.json --md >>report.md
+            cml publish estimators.png --md >> report.md
             cml send-comment report.md
             
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         with:
-          file-path: metrics.json
-          commit-msg: Update metrics.json
+          file-path: score.json
+          commit-msg: Update score.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
